@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "resume")
@@ -25,4 +26,7 @@ public class Resume {
     private List<String> skills;
     @ElementCollection
     private List<String> links;
+
+    @OneToMany(mappedBy = "resume")
+    private Set<Project> projects;
 }
