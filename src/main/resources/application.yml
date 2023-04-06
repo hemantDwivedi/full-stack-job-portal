@@ -1,0 +1,9 @@
+spring:
+  datasource:
+    username: root
+    password: zero
+    url: jdbc:mysql://localhost:3306/jobless
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
