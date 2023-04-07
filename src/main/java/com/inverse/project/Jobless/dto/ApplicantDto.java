@@ -1,5 +1,6 @@
 package com.inverse.project.Jobless.dto;
 
+import com.inverse.project.Jobless.models.ApplicationDetails;
 import com.inverse.project.Jobless.models.Resume;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,4 +15,6 @@ public class ApplicantDto {
     private String role;
 
     private Resume resume;
+
+    private ApplicationDetails applicationDetails;
 }

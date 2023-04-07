@@ -19,4 +19,7 @@ public class Applicant {
 
     @OneToOne(mappedBy = "applicant")
     private Resume resume;
+
+    @OneToOne(mappedBy = "applicant")
+    private ApplicationDetails applicationDetails;
 }
