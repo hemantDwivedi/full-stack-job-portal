@@ -20,17 +20,17 @@ public class ResumeController {
     }
     // fetch a specific resume
     @GetMapping("/{id}")
-    public ResponseEntity<ResumeDto> getById(@PathVariable int id){
+    public ResponseEntity<ResumeDto> getById(@PathVariable Integer id){
         return new ResponseEntity<>(this.resumeService.getById(id), HttpStatus.FOUND);
     }
     // update resume
     @PutMapping("/{id}")
-    public ResponseEntity<ResumeDto> update(@PathVariable int id, @RequestBody ResumeDto resumeDto){
+    public ResponseEntity<ResumeDto> update(@PathVariable Integer id, @RequestBody ResumeDto resumeDto){
         return new ResponseEntity<>(this.resumeService.update(resumeDto, id), HttpStatus.OK);
     }
     // delete a resume
     @DeleteMapping("/{id}")
-    public ResponseEntity<APIResponse> delete(@PathVariable int id){
+    public ResponseEntity<APIResponse> delete(@PathVariable Integer id){
         this.resumeService.delete(id);
         return new ResponseEntity<>(new APIResponse("Resume deleted ID: " + id), HttpStatus.OK);
     }

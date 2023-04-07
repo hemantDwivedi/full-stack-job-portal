@@ -22,7 +22,7 @@ public class ResumeServiceImpl implements ResumeService {
         return this.modelMap.modelMapper().map(resume, ResumeDto.class);
     }
     @Override
-    public ResumeDto getById(int id) {
+    public ResumeDto getById(Integer id) {
         Resume resume = this.repository.findById(id)
                 .orElseThrow(
                         () -> new ResourceNotFoundException("Resume not found: ID " + id)
@@ -31,7 +31,7 @@ public class ResumeServiceImpl implements ResumeService {
     }
 
     @Override
-    public ResumeDto update(ResumeDto resumeDto, int id) {
+    public ResumeDto update(ResumeDto resumeDto, Integer id) {
         Resume resume = this.repository.findById(id)
                 .orElseThrow(
                         () -> new ResourceNotFoundException("Resume not found: ID " + id)
@@ -48,7 +48,7 @@ public class ResumeServiceImpl implements ResumeService {
     }
 
     @Override
-    public void delete(int id) {
+    public void delete(Integer id) {
         Resume resume = this.repository.findById(id)
                 .orElseThrow(
                         () -> new ResourceNotFoundException("Resume not found: ID " + id)

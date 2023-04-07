@@ -14,7 +14,7 @@ import java.util.Set;
 public class Resume {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
     private String name;
     private String email;
     private String phone;

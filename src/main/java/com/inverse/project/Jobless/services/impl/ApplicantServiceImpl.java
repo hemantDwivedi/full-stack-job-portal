@@ -40,7 +40,7 @@ public class ApplicantServiceImpl implements ApplicantService {
     }
 
     @Override
-    public ApplicantDto getById(int id) {
+    public ApplicantDto getById(Integer id) {
         Applicant applicant = this.applicantRepository.findById(id)
                 .orElseThrow(
                         () -> new ResourceNotFoundException("Applicant not found: ID " + id)
@@ -49,7 +49,7 @@ public class ApplicantServiceImpl implements ApplicantService {
     }
 
     @Override
-    public ApplicantDto updateApplicant(ApplicantDto applicantDto, int id) {
+    public ApplicantDto updateApplicant(ApplicantDto applicantDto, Integer id) {
         Applicant applicant = this.applicantRepository.findById(id)
         .orElseThrow(
                 () -> new ResourceNotFoundException("Applicant not found: ID " + id)
@@ -62,7 +62,7 @@ public class ApplicantServiceImpl implements ApplicantService {
     }
 
     @Override
-    public void deleteApplicant(int id) {
+    public void deleteApplicant(Integer id) {
         Applicant applicant = this.applicantRepository.findById(id)
                 .orElseThrow(
                 () -> new ResourceNotFoundException("Applicant not found: ID " + id)

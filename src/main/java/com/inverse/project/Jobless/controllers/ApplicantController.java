@@ -28,17 +28,17 @@ public class ApplicantController {
     }
     // fetch a specific applicant
     @GetMapping("/{id}")
-    public ResponseEntity<ApplicantDto> getById(@PathVariable int id){
+    public ResponseEntity<ApplicantDto> getById(@PathVariable Integer id){
         return new ResponseEntity<>(this.applicantService.getById(id), HttpStatus.FOUND);
     }
     // update applicant
     @PutMapping("/{id}")
-    public ResponseEntity<ApplicantDto> updateApplicant(@RequestBody ApplicantDto applicantDto, @PathVariable int id){
+    public ResponseEntity<ApplicantDto> updateApplicant(@RequestBody ApplicantDto applicantDto, @PathVariable Integer id){
         return new ResponseEntity<>(this.applicantService.updateApplicant(applicantDto, id), HttpStatus.OK);
     }
     // delete a specific applicant
     @DeleteMapping("/{id}")
-    public ResponseEntity<APIResponse> deleteApplicant(@PathVariable int id){
+    public ResponseEntity<APIResponse> deleteApplicant(@PathVariable Integer id){
         this.applicantService.deleteApplicant(id);
         return new ResponseEntity<>(new APIResponse("Applicant deleted ID: " + id), HttpStatus.OK);
     }
