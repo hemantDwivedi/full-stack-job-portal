@@ -33,11 +33,14 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public ProjectDto update(ProjectDto projectDto, Integer id) {
+    public ProjectDto update(ProjectDto projectDto,Integer resumeId, Integer id) {
         Project project = this.projectRepository.findById(id)
                 .orElseThrow(
                         () -> new ResourceNotFoundException("Project not found ID: " + id)
                 );
+        if (!project.getResume().getId().equals(resumeId)) {
+            throw new ResourceNotFoundException("Resume Id not found: " + resumeId);
+        }
         project.setTitle(projectDto.getTitle());
         project.setDescription(projectDto.getDescription());
         project.setLink(projectDto.getLink());
@@ -46,11 +49,14 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public void delete(Integer id) {
+    public void delete(Integer resumeId, Integer id) {
         Project project = this.projectRepository.findById(id)
                 .orElseThrow(
                         () -> new ResourceNotFoundException("Project not found ID: " + id)
                 );
+        if (!project.getResume().getId().equals(resumeId)) {
+            throw new ResourceNotFoundException("Resume Id not found: " + resumeId);
+        }
         this.projectRepository.delete(project);
     }
 }

@@ -22,15 +22,17 @@ public class ProjectController {
     }
 
     // update project information
-    @PutMapping("/projects/{id}")
-    public ResponseEntity<ProjectDto> update(@RequestBody ProjectDto projectDto,@PathVariable Integer id){
-        return new ResponseEntity<>(this.projectService.update(projectDto, id), HttpStatus.OK);
+    @PutMapping("/{resumeId}/projects/{id}")
+    public ResponseEntity<ProjectDto> update(@RequestBody ProjectDto projectDto,
+                                             @PathVariable Integer resumeId,
+                                             @PathVariable Integer id){
+        return new ResponseEntity<>(this.projectService.update(projectDto,resumeId, id), HttpStatus.OK);
     }
 
     // delete a specific project
-    @DeleteMapping("/projects/{id}")
-    public ResponseEntity<APIResponse> delete(@PathVariable Integer id){
-        this.projectService.delete(id);
+    @DeleteMapping("/{resumeId}/projects/{id}")
+    public ResponseEntity<APIResponse> delete(@PathVariable Integer resumeId,@PathVariable Integer id){
+        this.projectService.delete(resumeId,id);
         return new ResponseEntity<>(new APIResponse("Project deleted ID: " + id), HttpStatus.OK);
     }
 }
