@@ -1,5 +1,6 @@
 package com.inverse.project.Jobless.dto;
 
+import com.inverse.project.Jobless.models.Education;
 import com.inverse.project.Jobless.models.Project;
 import lombok.Getter;
 import lombok.Setter;
@@ -19,6 +20,6 @@ public class ResumeDto {
     private List<String> language;
     private List<String> skills;
     private List<String> links;
-
-    private Set<Project> projects;
+    private Set<EducationDto> educations;
+    private Set<ProjectDto> projects;
 }

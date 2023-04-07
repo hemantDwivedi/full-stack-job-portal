@@ -28,5 +28,8 @@ public class Resume {
     private List<String> links;
 
     @OneToMany(mappedBy = "resume")
+    private Set<Education> educations;
+
+    @OneToMany(mappedBy = "resume")
     private Set<Project> projects;
 }
