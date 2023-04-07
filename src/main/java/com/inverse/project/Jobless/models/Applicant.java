@@ -16,4 +16,7 @@ public class Applicant {
     private String email;
     private String password;
     private String role;
+
+    @OneToOne(mappedBy = "applicant")
+    private Resume resume;
 }

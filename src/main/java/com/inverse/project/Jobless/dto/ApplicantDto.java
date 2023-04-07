@@ -1,5 +1,6 @@
 package com.inverse.project.Jobless.dto;
 
+import com.inverse.project.Jobless.models.Resume;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,4 +12,6 @@ public class ApplicantDto {
     private String email;
     private String password;
     private String role;
+
+    private Resume resume;
 }

@@ -9,29 +9,32 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/resume")
+@RequestMapping("/api/applicant")
 public class ResumeController {
     @Autowired
     private ResumeService resumeService;
     // create resume
-    @PostMapping
-    public ResponseEntity<ResumeDto> create(@RequestBody ResumeDto resumeDto){
-        return new ResponseEntity<>(this.resumeService.create(resumeDto), HttpStatus.CREATED);
+    @PostMapping("/{applicantId}/resume")
+    public ResponseEntity<ResumeDto> create(@RequestBody ResumeDto resumeDto, @PathVariable Integer applicantId){
+        return new ResponseEntity<>(this.resumeService.create(resumeDto, applicantId), HttpStatus.CREATED);
     }
     // fetch a specific resume
-    @GetMapping("/{id}")
+    @GetMapping("/{applicantId}/resume/{id}")
     public ResponseEntity<ResumeDto> getById(@PathVariable Integer id){
         return new ResponseEntity<>(this.resumeService.getById(id), HttpStatus.FOUND);
     }
     // update resume
-    @PutMapping("/{id}")
-    public ResponseEntity<ResumeDto> update(@PathVariable Integer id, @RequestBody ResumeDto resumeDto){
-        return new ResponseEntity<>(this.resumeService.update(resumeDto, id), HttpStatus.OK);
+    @PutMapping("/{applicantId}/resume/{id}")
+    public ResponseEntity<ResumeDto> update(@PathVariable Integer id,
+                                            @PathVariable Integer applicantId,
+                                            @RequestBody ResumeDto resumeDto){
+        return new ResponseEntity<>(this.resumeService.update(resumeDto, applicantId, id), HttpStatus.OK);
     }
     // delete a resume
-    @DeleteMapping("/{id}")
-    public ResponseEntity<APIResponse> delete(@PathVariable Integer id){
-        this.resumeService.delete(id);
+    @DeleteMapping("/{applicantId}/resume/{id}")
+    public ResponseEntity<APIResponse> delete(@PathVariable Integer applicantId,
+                                              @PathVariable Integer id){
+        this.resumeService.delete(applicantId,id);
         return new ResponseEntity<>(new APIResponse("Resume deleted ID: " + id), HttpStatus.OK);
     }
 }
