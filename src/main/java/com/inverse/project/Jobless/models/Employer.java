@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -21,4 +22,7 @@ public class Employer {
     private String email;
     private String password;
     private String role;
+
+    @OneToMany(mappedBy = "employer")
+    private List<JobCategory> categories;
 }

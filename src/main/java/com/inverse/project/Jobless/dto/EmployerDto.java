@@ -1,10 +1,9 @@
 package com.inverse.project.Jobless.dto;
 
-import com.inverse.project.Jobless.models.Job;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Set;
+import java.util.List;
 
 @Getter
 @Setter
@@ -15,4 +14,6 @@ public class EmployerDto {
     private String email;
     private String password;
     private String role;
+
+    private List<JobCategoryDto> categories;
 }

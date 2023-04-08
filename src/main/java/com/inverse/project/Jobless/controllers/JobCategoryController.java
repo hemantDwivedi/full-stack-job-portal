@@ -11,22 +11,25 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/job-categories")
+@RequestMapping("/api/employer")
 public class JobCategoryController {
 
     @Autowired
     private JobCategoryService jobCategoryService;
 
     // create category
-    @PostMapping
-    public ResponseEntity<JobCategoryDto> create(@RequestBody JobCategoryDto jobCategoryDto){
-        return new ResponseEntity<>(this.jobCategoryService.create(jobCategoryDto), HttpStatus.CREATED);
+    @PostMapping("/{employerId}/job-categories")
+    public ResponseEntity<JobCategoryDto> create(@RequestBody JobCategoryDto jobCategoryDto,
+                                                 @PathVariable Integer employerId){
+        return new ResponseEntity<>(this.jobCategoryService.create(jobCategoryDto, employerId), HttpStatus.CREATED);
     }
 
     // update category
-    @PutMapping("/{id}")
-    public ResponseEntity<JobCategoryDto> update(@RequestBody JobCategoryDto jobCategoryDto, @PathVariable Integer id){
-        return new ResponseEntity<>(this.jobCategoryService.update(jobCategoryDto, id), HttpStatus.OK);
+    @PutMapping("/{employerId}/job-categories/{id}")
+    public ResponseEntity<JobCategoryDto> update(@RequestBody JobCategoryDto jobCategoryDto,
+                                                 @PathVariable Integer employerId,
+                                                 @PathVariable Integer id){
+        return new ResponseEntity<>(this.jobCategoryService.update(jobCategoryDto,employerId, id), HttpStatus.OK);
     }
 
     // get all category
