@@ -15,18 +15,20 @@ public class AppDetailsController {
     private AppDetailService appDetailService;
 
     // create application details
-    @PostMapping("/{applicantId}/application-details")
+    @PostMapping("/{applicantId}/jobs/{jodId}/application-details")
     public ResponseEntity<ApplicationDetailsDto> create(@RequestBody ApplicationDetailsDto applicationDetailsDto,
+                                                        @PathVariable Integer jodId,
                                                         @PathVariable Integer applicantId){
-        return new ResponseEntity<>(this.appDetailService.create(applicationDetailsDto, applicantId), HttpStatus.CREATED);
+        return new ResponseEntity<>(this.appDetailService.create(applicationDetailsDto, applicantId, jodId), HttpStatus.CREATED);
     }
 
     // udpate application details
-    @PutMapping("/{applicantId}/application-details/{id}")
+    @PutMapping("/{applicantId}/jobs/{jodId}/application-details/{id}")
     public ResponseEntity<ApplicationDetailsDto> create(@RequestBody ApplicationDetailsDto applicationDetailsDto,
                                                         @PathVariable Integer applicantId,
+                                                        @PathVariable Integer jodId,
                                                         @PathVariable Integer id){
-        return new ResponseEntity<>(this.appDetailService.update(applicationDetailsDto, applicantId, id), HttpStatus.OK);
+        return new ResponseEntity<>(this.appDetailService.update(applicationDetailsDto, applicantId,jodId, id), HttpStatus.OK);
     }
 
     // delete application details

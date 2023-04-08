@@ -34,4 +34,7 @@ public class Job {
     @ManyToOne
     @JoinColumn(name = "job_category_id")
     private JobCategory jobCategory;
+
+    @OneToMany(mappedBy = "job")
+    private List<ApplicationDetails> applicationDetails;
 }

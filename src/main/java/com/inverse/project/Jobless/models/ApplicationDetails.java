@@ -20,4 +20,7 @@ public class ApplicationDetails {
     @OneToOne
     @JsonIgnore
     private Applicant applicant;
+
+    @ManyToOne
+    private Job job;
 }

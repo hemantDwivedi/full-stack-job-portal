@@ -21,4 +21,6 @@ public class JobDto {
     private String companyName;
     private String companyAbout;
     private String companyWebsite;
+
+    private List<ApplicationDetailsDto> applicationDetails;
 }
