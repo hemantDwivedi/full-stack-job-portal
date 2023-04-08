@@ -8,7 +8,7 @@ import java.util.Set;
 @Setter
 @Getter
 public class JobCategoryDto {
-    private Integer id;
+    // private Integer id;
     private String name;
 
     private Set<JobDto> jobs;

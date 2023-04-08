@@ -8,7 +8,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class EducationDto {
-    private Integer id;
+    // private Integer id;
     private String name;
     private String degree;
     private String startDate;

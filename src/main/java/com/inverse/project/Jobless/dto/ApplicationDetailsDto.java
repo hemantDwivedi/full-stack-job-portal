@@ -6,6 +6,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class ApplicationDetailsDto {
-    private Integer id;
+    // private Integer id; // Don't need to show id
     private String status;
 }

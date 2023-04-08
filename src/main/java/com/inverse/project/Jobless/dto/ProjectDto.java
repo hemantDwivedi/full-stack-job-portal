@@ -6,7 +6,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class ProjectDto {
-    private Integer id;
+    // private Integer id;
     private String title;
     private String description;
     private String link;
