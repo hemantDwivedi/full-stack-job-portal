@@ -24,5 +24,6 @@ public class Employer {
     private String role;
 
     @OneToMany(mappedBy = "employer")
+    @JsonIgnore
     private List<JobCategory> categories;
 }

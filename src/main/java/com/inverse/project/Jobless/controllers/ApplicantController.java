@@ -3,6 +3,7 @@ package com.inverse.project.Jobless.controllers;
 import com.inverse.project.Jobless.dto.ApplicantDto;
 import com.inverse.project.Jobless.exceptions.APIResponse;
 import com.inverse.project.Jobless.services.ApplicantService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +19,7 @@ public class ApplicantController {
 
     // create applicant
     @PostMapping
-    public ResponseEntity<ApplicantDto> createApplicant(@RequestBody ApplicantDto applicantDto){
+    public ResponseEntity<ApplicantDto> createApplicant(@Valid @RequestBody ApplicantDto applicantDto){
         return new ResponseEntity<>(this.applicantService.createApplicant(applicantDto), HttpStatus.CREATED);
     }
     // fetch all applicants
@@ -33,7 +34,7 @@ public class ApplicantController {
     }
     // update applicant
     @PutMapping("/{id}")
-    public ResponseEntity<ApplicantDto> updateApplicant(@RequestBody ApplicantDto applicantDto, @PathVariable Integer id){
+    public ResponseEntity<ApplicantDto> updateApplicant(@Valid @RequestBody ApplicantDto applicantDto, @PathVariable Integer id){
         return new ResponseEntity<>(this.applicantService.updateApplicant(applicantDto, id), HttpStatus.OK);
     }
     // delete a specific applicant

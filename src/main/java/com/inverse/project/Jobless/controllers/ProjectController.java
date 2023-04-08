@@ -4,6 +4,7 @@ package com.inverse.project.Jobless.controllers;
 import com.inverse.project.Jobless.dto.ProjectDto;
 import com.inverse.project.Jobless.exceptions.APIResponse;
 import com.inverse.project.Jobless.services.ProjectService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,13 +18,13 @@ public class ProjectController {
 
     // create project
     @PostMapping("/{resume_id}/projects")
-    public ResponseEntity<ProjectDto> create(@RequestBody ProjectDto projectDto, @PathVariable int resume_id){
+    public ResponseEntity<ProjectDto> create(@Valid @RequestBody ProjectDto projectDto, @PathVariable int resume_id){
         return new ResponseEntity<>(this.projectService.create(projectDto, resume_id), HttpStatus.CREATED);
     }
 
     // update project information
     @PutMapping("/{resumeId}/projects/{id}")
-    public ResponseEntity<ProjectDto> update(@RequestBody ProjectDto projectDto,
+    public ResponseEntity<ProjectDto> update(@Valid @RequestBody ProjectDto projectDto,
                                              @PathVariable Integer resumeId,
                                              @PathVariable Integer id){
         return new ResponseEntity<>(this.projectService.update(projectDto,resumeId, id), HttpStatus.OK);

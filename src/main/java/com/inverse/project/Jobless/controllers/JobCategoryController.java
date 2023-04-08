@@ -3,6 +3,7 @@ package com.inverse.project.Jobless.controllers;
 import com.inverse.project.Jobless.dto.JobCategoryDto;
 import com.inverse.project.Jobless.exceptions.APIResponse;
 import com.inverse.project.Jobless.services.JobCategoryService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,14 +20,14 @@ public class JobCategoryController {
 
     // create category
     @PostMapping("/{employerId}/job-categories")
-    public ResponseEntity<JobCategoryDto> create(@RequestBody JobCategoryDto jobCategoryDto,
+    public ResponseEntity<JobCategoryDto> create(@Valid @RequestBody JobCategoryDto jobCategoryDto,
                                                  @PathVariable Integer employerId){
         return new ResponseEntity<>(this.jobCategoryService.create(jobCategoryDto, employerId), HttpStatus.CREATED);
     }
 
     // update category
     @PutMapping("/{employerId}/job-categories/{id}")
-    public ResponseEntity<JobCategoryDto> update(@RequestBody JobCategoryDto jobCategoryDto,
+    public ResponseEntity<JobCategoryDto> update(@Valid @RequestBody JobCategoryDto jobCategoryDto,
                                                  @PathVariable Integer employerId,
                                                  @PathVariable Integer id){
         return new ResponseEntity<>(this.jobCategoryService.update(jobCategoryDto,employerId, id), HttpStatus.OK);

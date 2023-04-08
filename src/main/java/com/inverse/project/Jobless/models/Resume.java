@@ -29,9 +29,11 @@ public class Resume {
     private List<String> links;
 
     @OneToMany(mappedBy = "resume")
+    @JsonIgnore
     private Set<Education> educations;
 
     @OneToMany(mappedBy = "resume")
+    @JsonIgnore
     private Set<Project> projects;
 
     @OneToOne

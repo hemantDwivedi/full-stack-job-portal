@@ -3,6 +3,7 @@ package com.inverse.project.Jobless.controllers;
 import com.inverse.project.Jobless.dto.ResumeDto;
 import com.inverse.project.Jobless.exceptions.APIResponse;
 import com.inverse.project.Jobless.services.ResumeService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +16,7 @@ public class ResumeController {
     private ResumeService resumeService;
     // create resume
     @PostMapping("/{applicantId}/resume")
-    public ResponseEntity<ResumeDto> create(@RequestBody ResumeDto resumeDto, @PathVariable Integer applicantId){
+    public ResponseEntity<ResumeDto> create(@Valid @RequestBody ResumeDto resumeDto, @PathVariable Integer applicantId){
         return new ResponseEntity<>(this.resumeService.create(resumeDto, applicantId), HttpStatus.CREATED);
     }
     // fetch a specific resume
@@ -25,7 +26,7 @@ public class ResumeController {
     }
     // update resume
     @PutMapping("/{applicantId}/resume/{id}")
-    public ResponseEntity<ResumeDto> update(@PathVariable Integer id,
+    public ResponseEntity<ResumeDto> update(@Valid @PathVariable Integer id,
                                             @PathVariable Integer applicantId,
                                             @RequestBody ResumeDto resumeDto){
         return new ResponseEntity<>(this.resumeService.update(resumeDto, applicantId, id), HttpStatus.OK);

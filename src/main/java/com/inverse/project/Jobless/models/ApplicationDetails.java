@@ -22,5 +22,6 @@ public class ApplicationDetails {
     private Applicant applicant;
 
     @ManyToOne
+    @JsonIgnore
     private Job job;
 }

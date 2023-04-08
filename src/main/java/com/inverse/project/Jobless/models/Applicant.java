@@ -1,5 +1,6 @@
 package com.inverse.project.Jobless.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,8 +19,10 @@ public class Applicant {
     private String role;
 
     @OneToOne(mappedBy = "applicant")
+    @JsonIgnore
     private Resume resume;
 
     @OneToOne(mappedBy = "applicant")
+    @JsonIgnore
     private ApplicationDetails applicationDetails;
 }
