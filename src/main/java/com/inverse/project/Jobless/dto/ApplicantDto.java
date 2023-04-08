@@ -20,7 +20,7 @@ public class ApplicantDto {
     @NotBlank(message = "Password should not be blank")
     @Size(min = 8, max = 16)
     private String password;
-    private String role;
+    // private String role;
 
     private Resume resume;
 

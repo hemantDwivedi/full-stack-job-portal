@@ -23,7 +23,7 @@ public class EmployerDto {
     @NotBlank(message = "password should not be blank")
     @Size(min = 8, max = 16)
     private String password;
-    private String role;
+    // private String role;
 
     private List<JobCategoryDto> categories;
 }
