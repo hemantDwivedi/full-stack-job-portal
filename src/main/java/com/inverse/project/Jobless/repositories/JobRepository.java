@@ -1,9 +1,9 @@
 package com.inverse.project.Jobless.repositories;
 
-import com.inverse.project.Jobless.models.Education;
+import com.inverse.project.Jobless.models.Job;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface EducationRepository extends JpaRepository<Education, Integer> {
+public interface JobRepository extends JpaRepository<Job, Integer> {
 }
