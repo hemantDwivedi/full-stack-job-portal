@@ -1,9 +1,7 @@
 package com.inverse.project.Jobless.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.inverse.project.Jobless.Token.Token;
+import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -25,6 +23,9 @@ public class Admin implements UserDetails {
     private String email;
     private String password;
     private String role;
+
+    @OneToMany(mappedBy = "admin")
+    private List<Token> tokens;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

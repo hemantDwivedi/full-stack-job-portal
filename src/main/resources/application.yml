@@ -7,3 +7,11 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
+
+application:
+  security:
+    jwt:
+      secret-key: 462D4A614E645267556B58703273357638792F423F4528472B4B625065536856
+      expiration: 86400000 # a day
+      refresh-token:
+        expiration: 604800000 # a week = 86400000(day) * 7
