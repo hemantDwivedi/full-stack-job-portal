@@ -1,12 +1,12 @@
 package com.inverse.project.Jobless.services.impl;
 
-import com.inverse.project.Jobless.config.ModelMap;
+import com.inverse.project.Jobless.models.Role;
+import com.inverse.project.Jobless.util.ValueMapper;
 import com.inverse.project.Jobless.dto.ApplicantDto;
 import com.inverse.project.Jobless.exceptions.ResourceNotFoundException;
 import com.inverse.project.Jobless.models.Applicant;
 import com.inverse.project.Jobless.repositories.ApplicantRepository;
 import com.inverse.project.Jobless.services.ApplicantService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,18 +15,21 @@ import java.util.stream.Collectors;
 @Service
 public class ApplicantServiceImpl implements ApplicantService {
 
-    @Autowired
-    private ApplicantRepository applicantRepository;
+    private final ApplicantRepository applicantRepository;
 
-    @Autowired
-    private ModelMap modelMap;
+    private final ValueMapper valueMapper;
+
+    public ApplicantServiceImpl(ApplicantRepository applicantRepository, ValueMapper valueMapper) {
+        this.applicantRepository = applicantRepository;
+        this.valueMapper = valueMapper;
+    }
 
     @Override
     public ApplicantDto createApplicant(ApplicantDto applicantDto) {
-        Applicant applicant = this.modelMap.modelMapper().map(applicantDto, Applicant.class);
-        applicant.setRole("APPLICANT");
+        Applicant applicant = this.valueMapper.modelMapper().map(applicantDto, Applicant.class);
+        applicant.setRole(Role.ROLE_APPLICANT.toString());
         Applicant save = this.applicantRepository.save(applicant);
-        return this.modelMap.modelMapper().map(save, ApplicantDto.class);
+        return this.valueMapper.modelMapper().map(save, ApplicantDto.class);
     }
 
     @Override
@@ -35,7 +38,7 @@ public class ApplicantServiceImpl implements ApplicantService {
         return applicantList
                 .stream()
                 .map(
-                        applicant -> this.modelMap.modelMapper().map(applicant, ApplicantDto.class)
+                        applicant -> this.valueMapper.modelMapper().map(applicant, ApplicantDto.class)
                 ).collect(Collectors.toList());
     }
 
@@ -45,7 +48,7 @@ public class ApplicantServiceImpl implements ApplicantService {
                 .orElseThrow(
                         () -> new ResourceNotFoundException("Applicant not found: ID " + id)
                 );
-        return this.modelMap.modelMapper().map(applicant, ApplicantDto.class);
+        return this.valueMapper.modelMapper().map(applicant, ApplicantDto.class);
     }
 
     @Override
@@ -58,7 +61,7 @@ public class ApplicantServiceImpl implements ApplicantService {
         applicant.setEmail(applicantDto.getEmail());
         applicant.setPassword(applicantDto.getPassword());
         this.applicantRepository.save(applicant);
-        return this.modelMap.modelMapper().map(applicant, ApplicantDto.class);
+        return this.valueMapper.modelMapper().map(applicant, ApplicantDto.class);
     }
 
     @Override

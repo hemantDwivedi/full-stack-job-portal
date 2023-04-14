@@ -5,7 +5,6 @@ import com.inverse.project.Jobless.dto.ProjectDto;
 import com.inverse.project.Jobless.exceptions.APIResponse;
 import com.inverse.project.Jobless.services.ProjectService;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,8 +12,12 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/resume")
 public class ProjectController {
-    @Autowired
-    private ProjectService projectService;
+
+    private final ProjectService projectService;
+
+    public ProjectController(ProjectService projectService) {
+        this.projectService = projectService;
+    }
 
     // create project
     @PostMapping("/{resume_id}/projects")

@@ -1,28 +1,30 @@
 package com.inverse.project.Jobless.services.impl;
 
-import com.inverse.project.Jobless.config.ModelMap;
+import com.inverse.project.Jobless.models.Role;
+import com.inverse.project.Jobless.util.ValueMapper;
 import com.inverse.project.Jobless.dto.AdminDto;
 import com.inverse.project.Jobless.exceptions.ResourceNotFoundException;
 import com.inverse.project.Jobless.models.Admin;
 import com.inverse.project.Jobless.repositories.AdminRepository;
 import com.inverse.project.Jobless.services.AdminService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class AdminServiceImpl implements AdminService {
+    private final AdminRepository adminRepository;
+    private final ValueMapper valueMapper;
 
-    @Autowired
-    private AdminRepository adminRepository;
-    @Autowired
-    private ModelMap modelMap;
+    public AdminServiceImpl(AdminRepository adminRepository, ValueMapper valueMapper) {
+        this.adminRepository = adminRepository;
+        this.valueMapper = valueMapper;
+    }
 
     @Override
     public AdminDto create(AdminDto adminDto) {
-        Admin admin = this.modelMap.modelMapper().map(adminDto, Admin.class);
-        admin.setRole("ADMIN");
+        Admin admin = this.valueMapper.modelMapper().map(adminDto, Admin.class);
+        admin.setRole(Role.ROLE_ADMIN.toString());
         this.adminRepository.save(admin);
-        return this.modelMap.modelMapper().map(admin, AdminDto.class);
+        return this.valueMapper.modelMapper().map(admin, AdminDto.class);
     }
 
     @Override
@@ -35,7 +37,7 @@ public class AdminServiceImpl implements AdminService {
         admin.setName(adminDto.getName());
         admin.setPassword(admin.getPassword());
         this.adminRepository.save(admin);
-        return this.modelMap.modelMapper().map(admin, AdminDto.class);
+        return this.valueMapper.modelMapper().map(admin, AdminDto.class);
     }
 
     @Override
@@ -44,7 +46,7 @@ public class AdminServiceImpl implements AdminService {
                 .orElseThrow(
                         () -> new ResourceNotFoundException("Admin not found ID: " + id)
                 );
-        return this.modelMap.modelMapper().map(admin, AdminDto.class);
+        return this.valueMapper.modelMapper().map(admin, AdminDto.class);
     }
 
     @Override

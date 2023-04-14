@@ -1,6 +1,6 @@
 package com.inverse.project.Jobless.services.impl;
 
-import com.inverse.project.Jobless.config.ModelMap;
+import com.inverse.project.Jobless.util.ValueMapper;
 import com.inverse.project.Jobless.dto.ApplicationDetailsDto;
 import com.inverse.project.Jobless.exceptions.ResourceNotFoundException;
 import com.inverse.project.Jobless.models.Applicant;
@@ -10,25 +10,28 @@ import com.inverse.project.Jobless.repositories.ApplicantRepository;
 import com.inverse.project.Jobless.repositories.ApplicationDetailRepository;
 import com.inverse.project.Jobless.repositories.JobRepository;
 import com.inverse.project.Jobless.services.AppDetailService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class AppDetailServiceImpl implements AppDetailService {
-    @Autowired
-    private ApplicationDetailRepository detailRepository;
-    @Autowired
-    private ApplicantRepository applicantRepository;
 
-    @Autowired
-    private JobRepository jobRepository;
-    @Autowired
-    private ModelMap modelMap;
+    private final ApplicationDetailRepository detailRepository;
+    private final ApplicantRepository applicantRepository;
+
+    private final JobRepository jobRepository;
+    private final ValueMapper valueMapper;
+
+    public AppDetailServiceImpl(ApplicationDetailRepository detailRepository, ApplicantRepository applicantRepository, JobRepository jobRepository, ValueMapper valueMapper) {
+        this.detailRepository = detailRepository;
+        this.applicantRepository = applicantRepository;
+        this.jobRepository = jobRepository;
+        this.valueMapper = valueMapper;
+    }
 
     // create application details
     @Override
     public ApplicationDetailsDto create(ApplicationDetailsDto detailsDto, Integer applicantId, Integer jodId) {
-        ApplicationDetails application = this.modelMap.modelMapper().map(detailsDto, ApplicationDetails.class);
+        ApplicationDetails application = this.valueMapper.modelMapper().map(detailsDto, ApplicationDetails.class);
         Applicant applicant = this.applicantRepository.findById(applicantId)
                         .orElseThrow(
                                 () -> new ResourceNotFoundException("Applicant Id not found: " + applicantId)
@@ -40,7 +43,7 @@ public class AppDetailServiceImpl implements AppDetailService {
         application.setApplicant(applicant);
         application.setJob(job);
         this.detailRepository.save(application);
-        return this.modelMap.modelMapper().map(applicant, ApplicationDetailsDto.class);
+        return this.valueMapper.modelMapper().map(applicant, ApplicationDetailsDto.class);
     }
 
     // udpate application details
@@ -62,7 +65,7 @@ public class AppDetailServiceImpl implements AppDetailService {
         application.setStatus(detailsDto.getStatus());
         application.setJob(job);
         this.detailRepository.save(application);
-        return this.modelMap.modelMapper().map(application, ApplicationDetailsDto.class);
+        return this.valueMapper.modelMapper().map(application, ApplicationDetailsDto.class);
     }
 
     // delete specific application details

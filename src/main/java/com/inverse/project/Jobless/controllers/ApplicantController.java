@@ -14,8 +14,11 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/applicants")
 public class ApplicantController {
-    @Autowired
-    private ApplicantService applicantService;
+    private final ApplicantService applicantService;
+
+    public ApplicantController(ApplicantService applicantService) {
+        this.applicantService = applicantService;
+    }
 
     // create applicant
     @PostMapping

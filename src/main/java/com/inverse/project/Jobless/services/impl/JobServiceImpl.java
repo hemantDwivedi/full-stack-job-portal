@@ -1,6 +1,6 @@
 package com.inverse.project.Jobless.services.impl;
 
-import com.inverse.project.Jobless.config.ModelMap;
+import com.inverse.project.Jobless.util.ValueMapper;
 import com.inverse.project.Jobless.dto.JobDto;
 import com.inverse.project.Jobless.exceptions.ResourceNotFoundException;
 import com.inverse.project.Jobless.models.Job;
@@ -8,7 +8,6 @@ import com.inverse.project.Jobless.models.JobCategory;
 import com.inverse.project.Jobless.repositories.JobCategoryRepository;
 import com.inverse.project.Jobless.repositories.JobRepository;
 import com.inverse.project.Jobless.services.JobService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,26 +16,32 @@ import java.util.stream.Collectors;
 @Service
 public class JobServiceImpl implements JobService {
 
-    @Autowired
-    private JobRepository jobRepository;
 
-    @Autowired
-    private JobCategoryRepository jobCategoryRepository;
+    private final JobRepository jobRepository;
 
-    @Autowired
-    private ModelMap modelMap;
+
+    private final JobCategoryRepository jobCategoryRepository;
+
+
+    private final ValueMapper valueMapper;
+
+    public JobServiceImpl(JobRepository jobRepository, JobCategoryRepository jobCategoryRepository, ValueMapper valueMapper) {
+        this.jobRepository = jobRepository;
+        this.jobCategoryRepository = jobCategoryRepository;
+        this.valueMapper = valueMapper;
+    }
 
 
     @Override
     public JobDto create(JobDto jobDto, Integer jobCategoryId) {
-        Job job = this.modelMap.modelMapper().map(jobDto, Job.class);
+        Job job = this.valueMapper.modelMapper().map(jobDto, Job.class);
         JobCategory jobCategory = this.jobCategoryRepository.findById(jobCategoryId)
                 .orElseThrow(
                         () -> new ResourceNotFoundException("Job Category not found ID: " + jobCategoryId)
                 );
         job.setJobCategory(jobCategory);
         this.jobRepository.save(job);
-        return this.modelMap.modelMapper().map(job, JobDto.class);
+        return this.valueMapper.modelMapper().map(job, JobDto.class);
     }
 
     @Override
@@ -62,7 +67,7 @@ public class JobServiceImpl implements JobService {
         job.setCompanyWebsite(jobDto.getCompanyWebsite());
         job.setJobCategory(jobCategory);
         this.jobRepository.save(job);
-        return this.modelMap.modelMapper().map(job, JobDto.class);
+        return this.valueMapper.modelMapper().map(job, JobDto.class);
     }
 
     @Override
@@ -71,7 +76,7 @@ public class JobServiceImpl implements JobService {
                 .orElseThrow(
                         () -> new ResourceNotFoundException("Job not found ID: " + id)
                 );
-        return this.modelMap.modelMapper().map(job, JobDto.class);
+        return this.valueMapper.modelMapper().map(job, JobDto.class);
     }
 
     @Override
@@ -80,7 +85,7 @@ public class JobServiceImpl implements JobService {
         return jobs
                 .stream()
                 .map(
-                        job ->  this.modelMap.modelMapper().map(job, JobDto.class)
+                        job ->  this.valueMapper.modelMapper().map(job, JobDto.class)
                 ).collect(Collectors.toList());
     }
 

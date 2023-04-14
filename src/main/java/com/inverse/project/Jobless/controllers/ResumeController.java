@@ -4,7 +4,6 @@ import com.inverse.project.Jobless.dto.ResumeDto;
 import com.inverse.project.Jobless.exceptions.APIResponse;
 import com.inverse.project.Jobless.services.ResumeService;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,8 +11,12 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/applicant")
 public class ResumeController {
-    @Autowired
-    private ResumeService resumeService;
+    private final ResumeService resumeService;
+
+    public ResumeController(ResumeService resumeService) {
+        this.resumeService = resumeService;
+    }
+
     // create resume
     @PostMapping("/{applicantId}/resume")
     public ResponseEntity<ResumeDto> create(@Valid @RequestBody ResumeDto resumeDto, @PathVariable Integer applicantId){

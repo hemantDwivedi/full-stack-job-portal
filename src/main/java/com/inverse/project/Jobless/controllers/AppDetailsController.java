@@ -3,7 +3,6 @@ package com.inverse.project.Jobless.controllers;
 import com.inverse.project.Jobless.dto.ApplicationDetailsDto;
 import com.inverse.project.Jobless.exceptions.APIResponse;
 import com.inverse.project.Jobless.services.AppDetailService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,8 +10,12 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/applicant")
 public class AppDetailsController {
-    @Autowired
-    private AppDetailService appDetailService;
+
+    private final AppDetailService appDetailService;
+
+    public AppDetailsController(AppDetailService appDetailService) {
+        this.appDetailService = appDetailService;
+    }
 
     // create application details
     @PostMapping("/{applicantId}/jobs/{jodId}/application-details")

@@ -12,8 +12,12 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/resume")
 public class EducationController {
-    @Autowired
-    private EducationService educationService;
+
+    private final EducationService educationService;
+
+    public EducationController(EducationService educationService) {
+        this.educationService = educationService;
+    }
 
     // create education
     @PostMapping("/{resumeId}/educations")

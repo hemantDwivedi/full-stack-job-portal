@@ -4,9 +4,9 @@ import com.inverse.project.Jobless.dto.JobCategoryDto;
 import com.inverse.project.Jobless.exceptions.APIResponse;
 import com.inverse.project.Jobless.services.JobCategoryService;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,9 +14,11 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/employer")
 public class JobCategoryController {
+    private final JobCategoryService jobCategoryService;
 
-    @Autowired
-    private JobCategoryService jobCategoryService;
+    public JobCategoryController(JobCategoryService jobCategoryService) {
+        this.jobCategoryService = jobCategoryService;
+    }
 
     // create category
     @PostMapping("/{employerId}/job-categories")
@@ -35,6 +37,7 @@ public class JobCategoryController {
 
     // get all category
     @GetMapping
+    @PreAuthorize("hasAuthority('ROLE_EMPOLYER')")
     public ResponseEntity<List<JobCategoryDto>> getAll(){
         return new ResponseEntity<>(this.jobCategoryService.getAll(), HttpStatus.FOUND);
     }

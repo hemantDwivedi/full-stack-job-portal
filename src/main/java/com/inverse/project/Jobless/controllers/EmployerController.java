@@ -4,7 +4,6 @@ import com.inverse.project.Jobless.dto.EmployerDto;
 import com.inverse.project.Jobless.exceptions.APIResponse;
 import com.inverse.project.Jobless.services.EmployerService;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,8 +13,11 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/employers")
 public class EmployerController {
-    @Autowired
-    private EmployerService employerService;
+    private final EmployerService employerService;
+
+    public EmployerController(EmployerService employerService) {
+        this.employerService = employerService;
+    }
 
     // create employer
     @PostMapping
