@@ -9,5 +9,8 @@ public interface JobService {
     JobDto update(JobDto jobDto, Integer jobCategoryId, Integer id);
     JobDto getById(Integer id);
     List<JobDto> getAll();
+    List<JobDto> searchByName(String name);
+    List<JobDto> searchByLocation(String location);
+    List<JobDto> searchByComanyName(String companyName);
     void delete(Integer id);
 }

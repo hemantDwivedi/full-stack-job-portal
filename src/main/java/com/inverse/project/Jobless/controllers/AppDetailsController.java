@@ -5,10 +5,11 @@ import com.inverse.project.Jobless.exceptions.APIResponse;
 import com.inverse.project.Jobless.services.AppDetailService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/applicant")
+@RequestMapping("/api/application-details")
 public class AppDetailsController {
 
     private final AppDetailService appDetailService;
@@ -18,26 +19,27 @@ public class AppDetailsController {
     }
 
     // create application details
-    @PostMapping("/{applicantId}/jobs/{jodId}/application-details")
+    @PostMapping("/jobs/{jodId}")
+    @PreAuthorize("hasRole('APPLICANT')")
     public ResponseEntity<ApplicationDetailsDto> create(@RequestBody ApplicationDetailsDto applicationDetailsDto,
-                                                        @PathVariable Integer jodId,
-                                                        @PathVariable Integer applicantId){
-        return new ResponseEntity<>(this.appDetailService.create(applicationDetailsDto, applicantId, jodId), HttpStatus.CREATED);
+                                                        @PathVariable Integer jodId){
+        return new ResponseEntity<>(this.appDetailService.create(applicationDetailsDto, jodId), HttpStatus.CREATED);
     }
 
     // udpate application details
-    @PutMapping("/{applicantId}/jobs/{jodId}/application-details/{id}")
-    public ResponseEntity<ApplicationDetailsDto> create(@RequestBody ApplicationDetailsDto applicationDetailsDto,
-                                                        @PathVariable Integer applicantId,
+    @PutMapping("/jobs/{jodId}")
+    @PreAuthorize("hasRole('APPLICANT')")
+    public ResponseEntity<ApplicationDetailsDto> update(@RequestBody ApplicationDetailsDto applicationDetailsDto,
                                                         @PathVariable Integer jodId,
                                                         @PathVariable Integer id){
-        return new ResponseEntity<>(this.appDetailService.update(applicationDetailsDto, applicantId,jodId, id), HttpStatus.OK);
+        return ResponseEntity.ok(appDetailService.update(applicationDetailsDto, jodId, id));
     }
 
     // delete application details
-    @DeleteMapping("/{applicantId}/application-details/{id}")
-    public ResponseEntity<APIResponse> delete(@PathVariable Integer applicantId, @PathVariable Integer id){
-        this.appDetailService.delete(applicantId,id);
-        return new ResponseEntity<>(new APIResponse("Application details deleted ID: " + id), HttpStatus.OK);
+    @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('APPLICANT')")
+    public ResponseEntity<APIResponse> delete(@PathVariable Integer id){
+        this.appDetailService.delete(id);
+        return ResponseEntity.ok(new APIResponse("Application Details deleted"));
     }
 }

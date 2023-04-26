@@ -35,8 +35,4 @@ public class Resume {
     @OneToMany(mappedBy = "resume")
     @JsonIgnore
     private Set<Project> projects;
-
-    @OneToOne
-    @JsonIgnore
-    private Applicant applicant;
 }

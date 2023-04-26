@@ -17,9 +17,9 @@ public class ApplicationDetails {
     private Integer id;
     private String status;
 
-    @OneToOne
-    @JsonIgnore
-    private Applicant applicant;
+//    @OneToOne
+//    @JsonIgnore
+//    private Applicant applicant;
 
     @ManyToOne
     @JsonIgnore

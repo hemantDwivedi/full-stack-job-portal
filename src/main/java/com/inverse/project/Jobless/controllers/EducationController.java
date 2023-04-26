@@ -4,39 +4,35 @@ import com.inverse.project.Jobless.dto.EducationDto;
 import com.inverse.project.Jobless.exceptions.APIResponse;
 import com.inverse.project.Jobless.services.EducationService;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/resume")
+@RequestMapping("/api/educations")
+@AllArgsConstructor
+@PreAuthorize("hasRole('APPLICANT')")
 public class EducationController {
-
     private final EducationService educationService;
-
-    public EducationController(EducationService educationService) {
-        this.educationService = educationService;
-    }
-
     // create education
-    @PostMapping("/{resumeId}/educations")
+    @PostMapping
     public ResponseEntity<EducationDto> create(@Valid @RequestBody EducationDto educationDto,
-                                               @PathVariable Integer resumeId){
+                                               @RequestParam Integer resumeId){
         return new ResponseEntity<>(this.educationService.create(educationDto, resumeId), HttpStatus.CREATED);
     }
     // update education
-    @PutMapping("/{resumeId}/educations/{id}")
+    @PutMapping("/educations/{id}")
     public ResponseEntity<EducationDto> update(@Valid @RequestBody EducationDto educationDto,
-                                               @PathVariable Integer resumeId,
                                                @PathVariable Integer id){
-        return new ResponseEntity<>(this.educationService.update(educationDto,resumeId, id), HttpStatus.OK);
+        return ResponseEntity.ok(educationService.update(educationDto, id));
     }
     // delete education
     @DeleteMapping("/{resumeId}/educations/{id}")
     public ResponseEntity<APIResponse> delete(@PathVariable Integer resumeId,
                                               @PathVariable Integer id){
-        this.educationService.delete(resumeId,id);
-        return new ResponseEntity<>(new APIResponse("Education deleted ID: " + id), HttpStatus.OK);
+        this.educationService.delete(id);
+        return ResponseEntity.ok(new APIResponse("Education detail deleted id : " + id));
     }
 }
