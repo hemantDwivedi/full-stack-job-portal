@@ -1,1 +1,1 @@
-# Jobless - Job Searching App
+# Jobless - Job Portal
