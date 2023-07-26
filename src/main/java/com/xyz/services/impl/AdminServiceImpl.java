@@ -1,12 +1,12 @@
-package com.inverse.project.Jobless.services.impl;
+package com.xyz.services.impl;
 
-import com.inverse.project.Jobless.models.Role;
-import com.inverse.project.Jobless.util.ValueMapper;
-import com.inverse.project.Jobless.dto.AdminDto;
+import com.xyz.models.Role;
+import com.xyz.util.ValueMapper;
+import com.xyz.dto.AdminDto;
 import com.inverse.project.Jobless.exceptions.ResourceNotFoundException;
 import com.inverse.project.Jobless.models.Admin;
-import com.inverse.project.Jobless.repositories.AdminRepository;
-import com.inverse.project.Jobless.services.AdminService;
+import com.xyz.repositories.AdminRepository;
+import com.xyz.services.AdminService;
 import org.springframework.stereotype.Service;
 
 @Service

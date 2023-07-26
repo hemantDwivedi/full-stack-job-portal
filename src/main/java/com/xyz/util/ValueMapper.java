@@ -1,4 +1,4 @@
-package com.inverse.project.Jobless.util;
+package com.xyz.util;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;

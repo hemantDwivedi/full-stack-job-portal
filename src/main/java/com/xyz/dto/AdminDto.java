@@ -1,4 +1,4 @@
-package com.inverse.project.Jobless.dto;
+package com.xyz.dto;
 
 import lombok.Getter;
 import lombok.Setter;

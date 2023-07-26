@@ -1,4 +1,4 @@
-package com.inverse.project.Jobless.repositories;
+package com.xyz.repositories;
 
 import com.inverse.project.Jobless.models.Admin;
 import org.springframework.data.jpa.repository.JpaRepository;

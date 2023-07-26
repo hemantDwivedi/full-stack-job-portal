@@ -1,6 +1,6 @@
-package com.inverse.project.Jobless.services;
+package com.xyz.services;
 
-import com.inverse.project.Jobless.dto.AdminDto;
+import com.xyz.dto.AdminDto;
 
 public interface AdminService {
     AdminDto create(AdminDto adminDto);

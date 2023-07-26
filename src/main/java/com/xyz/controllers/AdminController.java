@@ -1,9 +1,8 @@
-package com.inverse.project.Jobless.controllers;
+package com.xyz.controllers;
 
-import com.inverse.project.Jobless.dto.AdminDto;
+import com.xyz.dto.AdminDto;
 import com.inverse.project.Jobless.exceptions.APIResponse;
-import com.inverse.project.Jobless.services.AdminService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.xyz.services.AdminService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

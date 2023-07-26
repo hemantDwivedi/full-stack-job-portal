@@ -1,4 +1,4 @@
-package com.inverse.project.Jobless.models;
+package com.xyz.models;
 
 public enum Role {
     ROLE_ADMIN,

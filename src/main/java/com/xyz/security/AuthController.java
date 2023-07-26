@@ -1,4 +1,4 @@
-package com.inverse.project.Jobless.security;
+package com.xyz.security;
 
 import com.inverse.project.Jobless.services.impl.AuthService;
 import jakarta.servlet.http.HttpServletRequest;
